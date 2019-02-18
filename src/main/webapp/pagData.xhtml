@@ -11,16 +11,24 @@
 </h:head>
 <h:body>
 
+
+
     <h:form id="form">
-        <p:outputLabel value="Nome: "><p:inputTextarea id="nome" rows="1" cols="33" value="#{pessoaController.nome}"/></p:outputLabel>
-        <br/>
-        <p:outputLabel value="CPF: "><p:inputTextarea id="cpf" rows="1" cols="33" value="#{pessoaController.cpf}"/></p:outputLabel>
-        <br/>
-        <p:commandButton value="Salvar" action="#{pessoaController.novaPessoa}" update="@form" style="margin-right:20px;" styleClass="ui-priority-primary" />
-        <p:commandButton value="Limpar" action="#{pessoaController.limpar}" update="@form" style="margin-right:20px;" styleClass="ui-priority-primary" />
 
+        <p:panelGrid columns="2" id="formulario-pessoa">
 
-    <p:dataTable var="pessoa" value="#{pessoaController.pessoas}">
+            <h:outputText value="Nome" />
+            <p:inputText id="nome" value="#{pessoaController.nome}"/>
+
+            <h:outputText value="CPF" />
+            <p:inputText id="cpf" value="#{pessoaController.cpf}"/>
+
+        </p:panelGrid>
+
+        <p:commandButton value="Salvar" action="#{pessoaController.novaPessoa}" update="data-table-pessoa,formulario-pessoa" style="margin-right:20px;" styleClass="ui-priority-primary" />
+        <p:commandButton value="Limpar" action="#{pessoaController.limpar}" update="formulario-pessoa" style="margin-right:20px;" styleClass="ui-priority-primary" />
+
+    <p:dataTable var="pessoa" value="#{pessoaController.pessoas}" id="data-table-pessoa">
         <p:column headerText="Id">
             <h:outputText value="#{pessoa.id}"/>
         </p:column>

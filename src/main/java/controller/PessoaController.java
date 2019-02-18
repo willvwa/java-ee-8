@@ -40,6 +40,8 @@ public class PessoaController implements Serializable {
         pessoa.setId(contador++);
 
         pessoas.add(pessoa);
+
+        this.limpar();
     }
 
     public void limpar() {
