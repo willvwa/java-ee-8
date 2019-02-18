@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+
+</h:head>
+<h:body>
+
+    <h:form id="form">
+        <p:outputLabel value="Nome: "><p:inputTextarea id="nome" rows="1" cols="33" value="#{pessoaController.nome}"/></p:outputLabel>
+        <br/>
+        <p:outputLabel value="CPF: "><p:inputTextarea id="cpf" rows="1" cols="33" value="#{pessoaController.cpf}"/></p:outputLabel>
+        <br/>
+        <p:commandButton value="Salvar" action="#{pessoaController.novaPessoa}" update="@form" style="margin-right:20px;" styleClass="ui-priority-primary" />
+        <p:commandButton value="Limpar" action="#{pessoaController.limpar}" update="@form" style="margin-right:20px;" styleClass="ui-priority-primary" />
+
+
+    <p:dataTable var="pessoa" value="#{pessoaController.pessoas}">
+        <p:column headerText="Id">
+            <h:outputText value="#{pessoa.id}"/>
+        </p:column>
+        <p:column headerText="Nome">
+            <h:outputText value="#{pessoa.nome}"/>
+        </p:column>
+        <p:column headerText="CPF">
+            <h:outputText value="#{pessoa.cpf}"/>
+        </p:column>
+    </p:dataTable>
+
+    </h:form>
+</h:body>
+</html>
