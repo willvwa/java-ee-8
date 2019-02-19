@@ -3,72 +3,67 @@ package controller;
 import model.Pessoa;
 
 import javax.annotation.PostConstruct;
-import javax.faces.view.ViewScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+@SessionScoped
 @Named
-@ViewScoped
 public class PessoaController implements Serializable {
-
-    private List<Pessoa> pessoas;
-
-    private static int contador;
-
-    private String nome;
-
-    private String cpf;
+    private Pessoa pessoaForm;
+    private List<Pessoa> pessoas;// = new ArrayList<>();
+    private Pessoa pessoaSelecionada;
 
     @PostConstruct
-    private void init() {
-
-        this.pessoas = new ArrayList<Pessoa>();
-
-        contador = 0;
+    private void innit (){
+        pessoaForm = new Pessoa();
+        pessoas = new ArrayList<>();
     }
 
-    public void novaPessoa() {
-
-        Pessoa pessoa = new Pessoa();
-
-        pessoa.setNome(this.nome);
-
-        pessoa.setCpf(this.cpf);
-
-        pessoa.setId(contador++);
-
-        pessoas.add(pessoa);
-
-        this.limpar();
+    public void cadastrar(){
+        pessoas.add(pessoaForm);
+        limpar();
     }
 
-    public void limpar() {
+    public void limpar(){
+        this.pessoaForm = new Pessoa();
+    }
 
-        this.nome = "";
+    public void excluir(){
+        this.pessoas.remove(pessoaForm);
+        limpar();
+    }
 
-        this.cpf = "";
+    public void aoSelecionar(){
+        this.pessoaForm = pessoaSelecionada;
+    }
+
+    public void aoDesselecionar(){
+        limpar();
     }
 
     public List<Pessoa> getPessoas() {
-
-        return this.pessoas;
+        return pessoas;
+    }
+    public void setPessoas(List<Pessoa> pessoas) {
+        this.pessoas = pessoas;
     }
 
-    public String getNome() {
-        return nome;
+    public Pessoa getPessoaSelecionada() {
+        return pessoaSelecionada;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setPessoaSelecionada(Pessoa pessoaSelecionada) {
+        this.pessoaSelecionada = pessoaSelecionada;
     }
 
-    public String getCpf() {
-        return cpf;
+    public Pessoa getPessoaForm() {
+        return pessoaForm;
     }
 
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
+    public void setPessoaForm(Pessoa pessoaForm) {
+        this.pessoaForm = pessoaForm;
     }
 }
