@@ -31,8 +31,6 @@
     </style>
 
     <h:form>
-        <p:growl id="msgs" showDetail="true"/>
-
         <p:panel id="formularioPessoa" header="Cadastro de Pessoas" style="margin-bottom:40px">
             <h:panelGrid columns="2" cellpadding="2">
 
@@ -50,16 +48,17 @@
             </h:panelGrid>
         </p:panel>
 
-        <p:growl id="growl" life="2000"/>
-        <p:commandButton value="Cadastrar" id="withIcon" action="#{pessoaController.cadastrar}" update="tabelaPessoa formularioPessoa"
+        <p:growl id="growl" showDetail="false" sticky="true"/>
+
+        <p:commandButton value="Cadastrar" id="withIcon" action="#{pessoaController.cadastrar}" update="@form"
                          style="margin-right:20px;" icon="pi pi-save"/>
 
         <p:commandButton value="Limpar" id="withIcon2" action="#{pessoaController.limpar}" update="@form"
-                         style="margin-right:20px;" icon="pi pi-save"/>
+                         immediate="true" process="@this" style="margin-right:20px;" icon="pi pi-save"/>
 
 
         <p:commandButton value="Exluir" id="withIcon3" action="#{pessoaController.excluir}" update="@form"
-                         style="margin-right:20px;" icon="pi pi-save"/>
+                         immediate="true" process="@this" style="margin-right:20px;" icon="pi pi-save"/>
 
         <br/>
         <br/>
@@ -82,6 +81,12 @@
 
             <p:column headerText="Telefone">
                 <h:outputText value="#{pessoa.telefone}"/>
+            </p:column>
+
+            <p:column headerText="Data de cadastro">
+                <h:outputText value="#{pessoa.dataCriacao}">
+                    <f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" type="localDateTime"/>
+                </h:outputText>
             </p:column>
         </p:dataTable>
 

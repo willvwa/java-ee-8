@@ -1,9 +1,7 @@
 package model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -15,6 +13,7 @@ public class Pessoa implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @NotEmpty(message = "Informe o nome.")
     private String nome;
 
     private String cpf;
@@ -25,8 +24,9 @@ public class Pessoa implements Serializable {
 
     private LocalDateTime dataCriacao;
 
-    public Pessoa() {
-
+    @PrePersist
+    @PreUpdate //Criacao e atualizacao
+    public void preSalvar() {
         dataCriacao = LocalDateTime.now();
     }
 
